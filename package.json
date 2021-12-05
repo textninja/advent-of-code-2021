@@ -4,7 +4,9 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "day": "node ./bin/hello-world.js"
+    "day": "node ./bin/day.js",
+    "input": "node ./bin/input.js",
+    "submit": "node ./bin/submit.js"
   },
   "author": "Joe Taylor <joe@textninja.net>",
   "license": "MIT",
@@ -13,6 +15,7 @@
     "nunjucks": "^3.2.3"
   },
   "dependencies": {
+    "axios": "^0.24.0",
     "graphology": "^0.23.1"
   }
 }
