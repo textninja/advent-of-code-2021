@@ -5,6 +5,7 @@
   "author": "Joe Taylor <joe@textninja.net>",
   "license": "MIT",
   "devDependencies": {
-    "jest": "^27.4.3"
+    "jest": "^27.4.3",
+    "nunjucks": "^3.2.3"
   }
 }
