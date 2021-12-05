@@ -2,6 +2,10 @@
   "name": "advent-of-code-2015",
   "version": "1.0.0",
   "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "day": "node ./bin/hello-world.js"
+  },
   "author": "Joe Taylor <joe@textninja.net>",
   "license": "MIT",
   "devDependencies": {
