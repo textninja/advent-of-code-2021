@@ -11,5 +11,8 @@
   "devDependencies": {
     "jest": "^27.4.3",
     "nunjucks": "^3.2.3"
+  },
+  "dependencies": {
+    "graphology": "^0.23.1"
   }
 }
