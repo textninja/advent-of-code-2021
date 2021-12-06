@@ -1,3 +1,4 @@
+const nunjucks = require('nunjucks');
 const path = require('path');
 const fs = require('fs');
 let dayNum = parseInt(process.argv.pop(), 10);
@@ -18,7 +19,12 @@ try {
   process.exit(1);
 }
 
-console.log(destinationDir);
+for (let file of fs.readdirSync(templateDir)) {
+  let src = fs.readFileSync(path.join(templateDir, file), "utf8");
+  let fileName = path.basename(file);
+  let transformedSrc = nunjucks.renderString(src, { day: dayNum });
+  fs.writeFileSync(path.join(destinationDir, fileName), transformedSrc);
+}
 
 //try {
 //  fs.mkdirSync()
