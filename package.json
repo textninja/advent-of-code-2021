@@ -7,7 +7,8 @@
     "day": "node ./bin/day.js",
     "input": "node ./bin/input.js",
     "open": "source ./bin/open",
-    "submit": "node ./bin/submit.js"
+    "submit": "node ./bin/submit.js",
+    "solve": "node ./bin/solve.js"
   },
   "author": "Joe Taylor <joe@textninja.net>",
   "license": "MIT",
