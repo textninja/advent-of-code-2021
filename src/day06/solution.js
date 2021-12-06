@@ -1,3 +1,18 @@
+let asz = 256+8;
+
+const days = Array(asz+1);
+
+for (let day = days.length-1; day >= 0; day--) {
+
+  let remaining = asz-day-2;
+
+  let spawns = Math.max(remaining / 7 | 0, 0);
+  days[day] = 1;
+  for (let j = 0; j < spawns; j++) {
+    days[day] += days[day+9+j*7];
+  }
+}
+
 function part1(input) {
   let fish = input.split(",").map(Number);
 
@@ -15,56 +30,17 @@ function part1(input) {
     }
   }
 
-  console.log(days); //?
-
   return fish.length; //?
-}
-
-
-
-
-function part1Refactored(input) {
-  let fish = input.split(",").map(Number);
-
-  numFish(0, 80); //?
-  numFish(1, 80); //?
-  numFish(2, 80); //?
-  numFish(3, 80); //?
-  numFish(4, 80); //?
-  numFish(5, 80); //?
-  numFish(6, 80); //?
-  numFish(7, 80); //?
-  numFish(8, 80); //?
-
-  //return fish.reduce((s,f) => s+numFish(f, 80), 0); //?
-}
-
-/*
-1 2             3
-0 6 5 4 3 2 1 0 6
-0 1 2 3 4 5 6 7 8
-*/
-
-numFish(0, 8); //?
-
-function numFish(counter, days) {
-  let directSpawns = (days+(6-counter))/7|0;
-
-  directSpawns; //?
-
-  
-
-  return 1+directSpawns;
 }
 
 function part2(input) {
   let fish = input.split(",").map(Number);
 
-  //numFish(fish[0], 256);
+  return fish.reduce((s,n) => s+days[n], 0);
 }
 
 module.exports = {
-  part1, part2, part1Refactored
+  part1, part2
 };
 
 if (require.main === module) {
@@ -73,4 +49,5 @@ if (require.main === module) {
   const input = fs.readFileSync(path.join(__dirname, "input.txt"), "utf8");
 
   console.log(part1(input));
+  console.log(part2(input));
 }
