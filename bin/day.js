@@ -1,8 +1,8 @@
 const nunjucks = require('nunjucks');
 const path = require('path');
 const fs = require('fs');
-let dayNum = parseInt(process.argv.pop(), 10);
-let year = 2015;
+const dayNum = parseInt(process.argv.pop(), 10);
+const year = 2015;
 
 if (isNaN(dayNum)) {
   console.error("usage: yarn day DAY");
