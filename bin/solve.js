@@ -18,21 +18,34 @@ const { part1, part2 } = require(solutionPath);
 const input = fs.readFileSync(inputPath, "utf8");
 
 if (part == 1) {
-  console.log(part1(input));
+  var answer = part1(input);
 } else if (part == 2) {
-  console.log(part2(input));
+  var answer = part2(input);
 }
 
-async function aoc(path) {
+(async() => {
 
-  path = path.replace(/^(?!\/)/, "/");
-  let url = `https://adventofcode.com${path}`;
+  let result = await aocSubmit(part, answer);
 
-  let response = await axios.get(url, {
-    headers: {
-      "Cookie": "session=" + encodeURIComponent(process.env["ADVENT_OF_CODE_SESSION_COOKIE"])
+  console.log(result);
+
+})();
+
+async function aocSubmit(part, solution) {
+
+  let url = `https://adventofcode.com/${year}/day/${dayNum}/answer`;
+  let response = await axios.post(
+    url,
+    {
+      data: {
+        answer: solution,
+        level: part
+      },
+      headers: {
+        "Cookie": "session=" + encodeURIComponent(process.env["ADVENT_OF_CODE_SESSION_COOKIE"])
+      }
     }
-  });
+  );
 
   return response.data;
 }
