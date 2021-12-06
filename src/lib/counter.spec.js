@@ -38,4 +38,11 @@ describe("Counter", () => {
     expect(c.counts()).toEqual([[1,1],[2,1]]);
   });
 
+  it("should be possible to increment by arbirtrary amounts", () => {
+    let c = new Counter;
+    c.inc("foo", 42);
+
+    expect(c.count("foo")).toEqual(42);
+  })
+
 });

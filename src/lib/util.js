@@ -10,8 +10,8 @@ class Counter {
     }
   }
 
-  inc(val) {
-    this._countMap.set(val, this.count(val)+1);
+  inc(val, amt=1) {
+    this._countMap.set(val, this.count(val)+amt);
   }
 
   count(val) {
