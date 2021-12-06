@@ -7,6 +7,7 @@
     "day": "node ./bin/day.js",
     "input": "node ./bin/input.js",
     "open": "source ./bin/open",
+    "start": "source ./bin/open",
     "submit": "node ./bin/solve.js",
     "solve": "node ./bin/solve.js"
   },
