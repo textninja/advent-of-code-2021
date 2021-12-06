@@ -25,28 +25,3 @@ for (let file of fs.readdirSync(templateDir)) {
   let transformedSrc = nunjucks.renderString(src, { day: dayNum });
   fs.writeFileSync(path.join(destinationDir, fileName), transformedSrc);
 }
-
-//try {
-//  fs.mkdirSync()
-//}
-
-// async function aoc(path) {
-
-//   path = path.replace(/^(?!\/)/, "/");
-//   let url = `https://adventofcode.com${path}`;
-
-//   let response = await axios.get(url, {
-//     headers: {
-//       "Cookie": "session=" + encodeURIComponent(process.env["ADVENT_OF_CODE_SESSION_COOKIE"])
-//     }
-//   });
-
-//   return response.data;
-// }
-
-// (async () => {
-
-//   let rawInput = await aoc(`/${year}/day/${dayNum}/input`); //?
-//   let rawDescription = await aoc(`/${year}/day/${dayNum}`); //?
-
-// })();
