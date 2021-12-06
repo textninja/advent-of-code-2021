@@ -26,26 +26,38 @@ if (part == 1) {
 (async() => {
 
   let result = await aocSubmit(part, answer);
-
   console.log(result);
 
 })();
 
 async function aocSubmit(part, solution) {
 
+  // <form method="post" action="2/answer">
+  // <input type="hidden" name="level" value="1"/>
+  // <p>Answer: <input type="text" name="answer" autocomplete="off"/>
+  // <input type="submit" value="[Submit]"/></p>
+  // </form>
+
+  let data = new URLSearchParams;
+  data.append("answer", solution);
+  data.append("level", part);
+
   let url = `https://adventofcode.com/${year}/day/${dayNum}/answer`;
   let response = await axios.post(
     url,
+    data.toString(),
     {
-      data: {
-        answer: solution,
-        level: part
-      },
       headers: {
         "Cookie": "session=" + encodeURIComponent(process.env["ADVENT_OF_CODE_SESSION_COOKIE"])
       }
     }
   );
 
-  return response.data;
+  if (/That's not the right answer/i.test(response.data)) {
+    return false;
+  } else if (/You gave an answer too recently/.test(response.data)) {
+    return response.data.match(/You have ([^.]+?) left to wait )/)[1];
+  }
+
+  return true;
 }
