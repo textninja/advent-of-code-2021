@@ -26,7 +26,7 @@ async function aoc(path) {
 }
 
 (async () => {
-  let result = await aoc(`/2015/day/${dayNum}/input`);
+  let result = await aoc(`/${year}/day/${dayNum}/input`);
 
   fs.writeFileSync(path.join(destinationDir, "input.txt"), result);
 })();
