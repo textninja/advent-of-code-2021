@@ -3,7 +3,7 @@ const axios = require("axios");
 const path = require('path');
 const fs = require('fs');
 const dayNum = parseInt(process.argv.pop(), 10);
-const year = 2015;
+const year = require('./year');
 
 if (isNaN(dayNum)) {
   console.error("usage: yarn input DAY");
