@@ -1,53 +1,37 @@
-let asz = 256+8;
-
-const days = Array(asz+1);
-
-for (let day = days.length-1; day >= 0; day--) {
-
-  let remaining = asz-day-2;
-
-  let spawns = Math.max(remaining / 7 | 0, 0);
-  days[day] = 1;
-  for (let j = 0; j < spawns; j++) {
-    days[day] += days[day+9+j*7];
-  }
-}
-
 function part1(input) {
-  let fish = input.split(",").map(Number);
-
-  let days = [];
-
-  for (let i = 0; i < 80; i++) {
-    let l = fish.length;
-    days.push(l);
-    for (let j = 0; j < l; j++) {
-      fish[j] = fish[j] - 1;
-      if (fish[j] < 0) {
-        fish[j] = 6;
-        fish.push(8);
-      }
-    }
-  }
-
-  return fish.length; //?
+  return fishiesOnDay(input, 80);
 }
 
 function part2(input) {
-  let fish = input.split(",").map(Number);
+  return fishiesOnDay(input, 256);
+}
 
-  return fish.reduce((s,n) => s+days[n], 0);
+function fishiesOnDay(input, day) {
+  let fishCounts = count(input.split(",").map(Number));
+
+  for (let i = 0; i < day; i++) {
+    let c = {};
+    for (let [counter,count] of Object.entries(fishCounts)) {
+      if (counter == 0) {
+        c[8] = count;
+        c[6] = (c[6]||0)+count;
+      } else {
+        c[counter-1] = (c[counter-1]||0)+count;
+      }
+    }
+    fishCounts = c;
+  }
+
+  return Object.values(fishCounts).reduce((s,v) => s+v, 0);
+}
+
+function count(list) {
+  return list.reduce((counts,item) => {
+    counts[item] = (counts[item] || 0) + 1;
+    return counts;
+  }, {});
 }
 
 module.exports = {
   part1, part2
 };
-
-if (require.main === module) {
-  const fs = require("fs");
-  const path = require("path");
-  const input = fs.readFileSync(path.join(__dirname, "input.txt"), "utf8");
-
-  console.log(part1(input));
-  console.log(part2(input));
-}
