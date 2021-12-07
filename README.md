@@ -13,8 +13,9 @@ I'm using VS Code with Wallaby for tests. There's a handful of yarn commands I u
  - `yarn solve 1 2`
    Submit solution for part 2
 
-## Todo
+## Todos and ideas
 
  - Add visualizations
  - Add client-side versions with Vue or React
- - More languages
+ - Add solutions in more languages
+ - Automatically extract sample data and test cases from description
