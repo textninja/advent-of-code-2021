@@ -1,8 +1,8 @@
 # Advent of Code
 
-This is the environment I use to solve advent of code puzzles. This one is configured for 2021, but it's a trivial change (to `bin/year.js`) to get it to work for other years.
+This is the environment I'm using to solve advent of code puzzles. This one is configured for 2021, but it's a trivial change (to `bin/year.js`) to get it to work for other years.
 
-I'm using VS Code with Wallaby. After running `yarn` to install dependencies, I typically run the following sequence of commands:
+I'm using VS Code with Wallaby for tests. There's a handful of yarn commands I use to bootstrap and scaffold my solutions. After running `yarn` to install dependencies, I typically run the following sequence of commands:
 
  - `yarn day 1`  
    Create scaffolding in src dir for day 1
