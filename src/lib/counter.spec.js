@@ -43,6 +43,28 @@ describe("Counter", () => {
     c.inc("foo", 42);
 
     expect(c.count("foo")).toEqual(42);
+  });
+
+  it("should be possible to iterate through counts", () => {
+    let c = new Counter;
+    c.inc("foo");
+    c.inc("bar", 5);
+    let steps = 0;
+    for (let [a, b] of c) {
+      steps++;
+    }
+    expect(steps).toEqual(2);
+  });
+
+  it("should display a total", () => {
+    let c = new Counter;
+    expect(c.total()).toEqual(0);
+    c.inc("a", 1);
+    expect(c.total()).toEqual(1);
+    c.inc("b", 5);
+    expect(c.total()).toEqual(6);
+    c.inc("a");
+    expect(c.total()).toEqual(7);
   })
 
 });

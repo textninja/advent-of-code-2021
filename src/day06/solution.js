@@ -1,3 +1,5 @@
+const { Counter } = require("../lib/util");
+
 function part1(input) {
   return fishiesOnDay(input, 80);
 }
@@ -7,29 +9,22 @@ function part2(input) {
 }
 
 function fishiesOnDay(input, day) {
-  let fishCounts = count(input.split(",").map(Number));
+  let fishCounts = new Counter(input.trim().split(",").map(Number));
 
   for (let i = 0; i < day; i++) {
-    let c = {};
-    for (let [counter,count] of Object.entries(fishCounts)) {
-      if (counter == 0) {
-        c[8] = count;
-        c[6] = (c[6]||0)+count;
+    let c = new Counter;
+    for (let [fish,count] of fishCounts) {
+      if (fish == 0) {
+        c.inc(8,count);
+        c.inc(6,count);
       } else {
-        c[counter-1] = (c[counter-1]||0)+count;
+        c.inc(fish-1, count);
       }
     }
     fishCounts = c;
   }
 
-  return Object.values(fishCounts).reduce((s,v) => s+v, 0);
-}
-
-function count(list) {
-  return list.reduce((counts,item) => {
-    counts[item] = (counts[item] || 0) + 1;
-    return counts;
-  }, {});
+  return fishCounts.total();
 }
 
 module.exports = {

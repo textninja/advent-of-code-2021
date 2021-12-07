@@ -22,6 +22,20 @@ class Counter {
     return [...this._countMap];
   }
 
+  *[Symbol.iterator]() {
+    for (let k of this._countMap.keys()) {
+      yield [k, this._countMap.get(k)];
+    }
+  }
+
+  total() {
+    let result = 0;
+    for (let v of this._countMap.values()) {
+      result += v;
+    }
+    return result;
+  }
+
 }
 
 
