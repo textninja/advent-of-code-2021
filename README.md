@@ -12,3 +12,9 @@ I'm using VS Code with Wallaby. After running `yarn` to install dependencies, I 
    Submit solution for part 1
  - `yarn solve 1 2`
    Submit solution for part 2
+
+## Todo
+
+ - Add visualizations
+ - Add client-side versions with Vue or React
+ - More languages
