@@ -3,4 +3,4 @@
 YEAR=$(node "$PWD/bin/year.js")
 open "https://adventofcode.com/$YEAR/day/$1"
 BASEDIR="$PWD/src/day$(printf "%02d" $1)"
-atom "$BASEDIR/solution.js" "$BASEDIR/solution.spec.js" "$BASEDIR/sample.txt" "$BASEDIR/input.txt"
+code "$BASEDIR/solution.js" "$BASEDIR/solution.spec.js" "$BASEDIR/sample.txt" "$BASEDIR/input.txt"
