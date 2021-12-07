@@ -26,21 +26,19 @@ if (part == 1) {
 (async() => {
 
   let result = await aocSubmit(part, answer);
-  console.log(result);
+  if (result === true) {
+    process.exit(0);
+  } else {
+    process.exit(1);
+  }
 
 })();
 
 async function aocSubmit(part, solution) {
-
-  // <form method="post" action="2/answer">
-  // <input type="hidden" name="level" value="1"/>
-  // <p>Answer: <input type="text" name="answer" autocomplete="off"/>
-  // <input type="submit" value="[Submit]"/></p>
-  // </form>
-
   let data = new URLSearchParams;
-  data.append("answer", solution);
-  data.append("level", part);
+  data.append("answer", solution.toString());
+  data.append("level", part.toString());
+  data.append("submit", "[Submit]");
 
   let url = `https://adventofcode.com/${year}/day/${dayNum}/answer`;
   let response = await axios.post(
@@ -54,10 +52,14 @@ async function aocSubmit(part, solution) {
   );
 
   if (/That's not the right answer/i.test(response.data)) {
+    console.error("Your answer is incorrect: ", solution);
     return false;
   } else if (/You gave an answer too recently/.test(response.data)) {
-    return response.data.match(/You have ([^.]+?) left to wait )/)[1];
+    console.error("You gave your answer too recently: ", solution);
+    console.error("Please wait ", response.data.match(/You have ([^.]+?) left to wait/)[1]);
+    return false;
   }
 
+  console.log("Your answer, ", solution, ", is correct!");
   return true;
 }
