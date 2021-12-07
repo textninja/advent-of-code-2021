@@ -1,7 +1,7 @@
 const config = {
   testPathIgnorePatterns: [
     "/node_modules/",
-    //"/_template/"
+    "/_template/"
   ]
 };
 
