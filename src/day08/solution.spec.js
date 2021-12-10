@@ -1,7 +1,6 @@
 const path = require('path');
 const fs = require('fs');
 const { part1, part2, deduce } = require('./solution');
-const { TestWatcher } = require('@jest/core');
 
 describe("Day 8", () => {
 
