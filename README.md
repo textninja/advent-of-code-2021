@@ -20,3 +20,4 @@ I'm using VS Code with Wallaby for tests. There's a handful of yarn commands I u
  - Add solutions in more languages
  - Automatically extract sample data and test cases from description
  - Add timers, screencasts, and write-ups like post mortems or blog posts
+ - Add dockerfile for each day's solution

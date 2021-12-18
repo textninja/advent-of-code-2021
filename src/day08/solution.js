@@ -34,12 +34,6 @@ function deduce(line, possibilities) {
 
   let [input, output] = line.split(" | ");
 
-  for (let word of output.split(" ")) {
-
-    let possibleNums = [0,1,2,3,4,5,6,filter((wl,i) => )
-
-  }
-
 }
 
 module.exports = {
