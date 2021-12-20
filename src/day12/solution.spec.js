@@ -10,7 +10,7 @@ describe("Day 12", () => {
   it("should process graph with two nodes and one edge", () => {
 
     let exampleLine = "start-A";
-    let processed = parseGraphInput(exampleLine, g);
+    let processed = parseGraphInput(exampleLine);
 
     expect(processed).toBeInstanceOf(Graph);
     expect(processed.edges().length).toEqual(1);
