@@ -3,20 +3,9 @@
 
 <head>
 <title>Day 13, Advent of Code 2021</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" integrity="sha512-dLxUelApnYxpLt6K2iomGngnHO83iUvZytA3YjDUCjT0HDOHKXnVYdf3hU4JjM8uEhxf9nD1/ey98U3t2vZ0qQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <style>
-    canvas {
-        /*animation: linear rotate 3s infinite;*/
-    }
-
-    @keyframes rotate {
-        from {
-            transform: rotateY(0deg);
-        }
-
-        to {
-            transform: rotateY(360deg);
-        }
-    }
+body { margin: 0; }
 </style>
 </head>
 
@@ -39,61 +28,34 @@ const input = `...#..#..#.
 #..........
 #.#........`.split("\n").map(row => [...row.trim()]);
 
-const cellSize = 20;
-const gridWidth = input[0].length;
-const gridHeight = input.length;
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+const renderer = new THREE.WebGLRenderer;
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
+
+const geometry = new THREE.PlaneGeometry(1, 1);
+const material = new THREE.MeshBasicMaterial({ color: 0x333333, side: THREE.DoubleSide, opacity: 0.3 });
+const surface = new THREE.Mesh(geometry, material);
+scene.add(surface);
+camera.position.z = 5;
 
 
-function generateCanvas() {
-    let canvas = document.createElement("canvas");
-    canvas.width = cellSize * gridWidth;
-    canvas.height = cellSize * gridHeight;
-    let ctx = canvas.getContext("2d");
-
-    for (let [y, row] of input.entries()) {
-        for (let [x, cell] of row.entries()) {
-            ctx.fillStyle = "red";
-            if (cell == "#") {
-                ctx.fillRect(x*cellSize, y*cellSize, cellSize, cellSize);
-            }
-        }
-    }
+const directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
+directionalLight.castShadow = true;
+scene.add( directionalLight );
 
 
-    document.body.appendChild(canvas);
+function animate() {
+    renderer.render(scene, camera);
 
-    return [canvas, ctx];
+    surface.rotation.y += 0.01;
+
+    requestAnimationFrame(animate);
 }
 
-let [canvas, ctx] = generateCanvas();
-
-
-function readPixels(canvas) {
-    let bb = canvas.getBoundingClientRect();
-
-    let overlay = document.createElement("canvas");
-    Object.assign(
-        overlay.style,
-        {
-            position: "fixed",
-            left: bb.left + "px",
-            top: bb.top + "px",
-            width: bb.width + "px",
-            height: bb.height + "px"
-        }
-    );
-
-    document.body.appendChild(overlay);
-
-    let ctx = overlay.getContext("2d");
-
-    ctx.
-
-
-}
-
-
-readPixels(canvas);
+animate();
 
 </script>
 </body>
