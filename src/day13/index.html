@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+
+<head>
+<title>Day 13, Advent of Code 2021</title>
+<style>
+    canvas {
+        /*animation: linear rotate 3s infinite;*/
+    }
+
+    @keyframes rotate {
+        from {
+            transform: rotateY(0deg);
+        }
+
+        to {
+            transform: rotateY(360deg);
+        }
+    }
+</style>
+</head>
+
+<body>
+<script>
+
+const input = `...#..#..#.
+....#......
+...........
+#..........
+...#....#.#
+...........
+...........
+...........
+...........
+...........
+.#....#.##.
+....#......
+......#...#
+#..........
+#.#........`.split("\n").map(row => [...row.trim()]);
+
+const cellSize = 20;
+const gridWidth = input[0].length;
+const gridHeight = input.length;
+
+
+function generateCanvas() {
+    let canvas = document.createElement("canvas");
+    canvas.width = cellSize * gridWidth;
+    canvas.height = cellSize * gridHeight;
+    let ctx = canvas.getContext("2d");
+
+    for (let [y, row] of input.entries()) {
+        for (let [x, cell] of row.entries()) {
+            ctx.fillStyle = "red";
+            if (cell == "#") {
+                ctx.fillRect(x*cellSize, y*cellSize, cellSize, cellSize);
+            }
+        }
+    }
+
+
+    document.body.appendChild(canvas);
+
+    return [canvas, ctx];
+}
+
+let [canvas, ctx] = generateCanvas();
+
+
+function readPixels(canvas) {
+    let bb = canvas.getBoundingClientRect();
+
+    let overlay = document.createElement("canvas");
+    Object.assign(
+        overlay.style,
+        {
+            position: "fixed",
+            left: bb.left + "px",
+            top: bb.top + "px",
+            width: bb.width + "px",
+            height: bb.height + "px"
+        }
+    );
+
+    document.body.appendChild(overlay);
+
+    let ctx = overlay.getContext("2d");
+
+    ctx.
+
+
+}
+
+
+readPixels(canvas);
+
+</script>
+</body>
+</html>
