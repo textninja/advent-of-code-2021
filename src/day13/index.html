@@ -12,50 +12,29 @@ body { margin: 0; }
 <body>
 <script>
 
-const input = `...#..#..#.
-....#......
-...........
-#..........
-...#....#.#
-...........
-...........
-...........
-...........
-...........
-.#....#.##.
-....#......
-......#...#
-#..........
-#.#........`.split("\n").map(row => [...row.trim()]);
-
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-
 const renderer = new THREE.WebGLRenderer;
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-const geometry = new THREE.PlaneGeometry(1, 1);
-const material = new THREE.MeshBasicMaterial({ color: 0x333333, side: THREE.DoubleSide, opacity: 0.3 });
-const surface = new THREE.Mesh(geometry, material);
-scene.add(surface);
-camera.position.z = 5;
+const camera = new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, 1, 500);
+camera.position.set(0, 0, 100);
+camera.lookAt(0, 0, 0);
 
+const scene = new THREE.Scene;
 
-const directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
-directionalLight.castShadow = true;
-scene.add( directionalLight );
+const material = new THREE.LineBasicMaterial({ color: 0x0000ff });
+const points = [];
 
+points.push(new THREE.Vector3(-10, 0, 0));
+points.push(new THREE.Vector3(0, 10, 0));
+points.push(new THREE.Vector3(10, 0, 0));
 
-function animate() {
-    renderer.render(scene, camera);
+const geometry = new THREE.BufferGeometry().setFromPoints(points);
 
-    surface.rotation.y += 0.01;
+const line = new THREE.Line(geometry, material);
 
-    requestAnimationFrame(animate);
-}
-
-animate();
+scene.add(line);
+renderer.render(scene, camera);
 
 </script>
 </body>
